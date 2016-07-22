@@ -1,17 +1,53 @@
 package br.com.willian2;
 
+import java.util.List;
+
 import br.com.willian2.entidade.Usuario;
 import br.com.willian2.persistencia.UsuarioDao;
 
 public class TesteUsuarioDao {
 
 	public static void main(String[] args) {
-		 testeExcluir();
-		
+		//testeSalvar();
+		//testeBuscarPorId();
+		//testeBuscarTodos();
+		testeAutenticar();
 	
 	}
 	
 	
+	private static void testeAutenticar() {
+		UsuarioDao usuDao = new UsuarioDao();
+		Usuario usu = new Usuario();
+		usu.setLogin("jjj");
+		usu.setSenha("123");
+		
+		Usuario usuRetorno = usuDao.autenticar(usu);
+		
+		System.out.println(usuRetorno);
+		
+	}
+
+
+	private static void testeBuscarTodos() {
+		UsuarioDao usuDao = new UsuarioDao();//instanciando um objeto de usuarioDao para poder usar o metodo buscar todos
+		List<Usuario> lista = usuDao.buscarTodos();// adicionando a lista de objeto que veio da Dao e inserindo em outra lista 
+		
+		for(Usuario u: lista){// Criando uma variável do tipo Usuario de nome u para percorre a lista e imprimir os objetos
+			System.out.println(u);
+		}
+		
+	}
+
+
+	private static void testeBuscarPorId() {
+		UsuarioDao usuDao = new UsuarioDao();
+		Usuario usu =	usuDao.buscarPorId(1);
+		
+		System.out.println(usu);
+	}
+
+
 	public static void testeCadastrar(){
 		Usuario usu = new Usuario();
 		usu.setNome("Valdinei");
@@ -46,5 +82,20 @@ public class TesteUsuarioDao {
 		
 		System.out.println("Excluido com sucesso!!!!!!");
 	}
-	//Parei na aula 2 tempo 2:14:20....
+	
+	public static void testeSalvar(){
+		Usuario usuario = new Usuario();
+		//usuario.setId(4);
+		usuario.setNome("ciclano");
+		usuario.setLogin("full");
+		usuario.setSenha("123");
+		
+		UsuarioDao usuDao = new UsuarioDao();
+		
+		usuDao.salvar(usuario);
+		
+		System.out.println("Salvo com sucesso!!!!!");
+		
+	}
+	// parei na aula 3 --tempo:42:29
 }
